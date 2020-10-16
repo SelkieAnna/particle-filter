@@ -1,0 +1,12 @@
+**/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+code/scripts/__pycache__/MapReader.cpython-38.pyc
+code/scripts/__pycache__/Resampling.cpython-38.pyc
+code/scripts/__pycache__/SensorModel.cpython-38.pyc
+code/scripts/__pycache__/MotionModel.cpython-38.pyc
+
+(Intelligent Robotics and Autonomous Agents) Sebastian Thrun_ Wolfram Burgard_ Dieter Fox - Probabilistic Robotics-Mit Press (2005).pdf
