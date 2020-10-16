@@ -155,7 +155,10 @@ def main():
         RESAMPLING
         """
         if (meas_type == "L"):
+            # resampling option one
+            # X_bar = resampler.low_variance_sampler(X_bar)
             
+            # resampling option two
             w = X_bar[:, 3] / np.sum(X_bar[:, 3])
             X_bar = [X_bar[i] for i in np.random.choice(np.arange(len(X_bar)), size=len(X_bar), p=w)]
             X_bar = np.array(X_bar)
