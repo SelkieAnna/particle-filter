@@ -91,10 +91,6 @@ def main():
     num_particles = 500
     X_bar = init_particles_freespace(num_particles, occupancy_map)
 
-    # np.set_printoptions(threshold=sys.maxsize)
-    # print(len(X_bar))
-    # return
-
     vis_flag = 1
 
     """
@@ -104,12 +100,8 @@ def main():
         visualize_map(occupancy_map)
         visualize_timestep(X_bar, None)
 
-    
-
     first_time_idx = True
     for time_idx, line in enumerate(logfile):
-
-
 
         # Read a single 'line' from the log file (can be either odometry or laser measurement)
         meas_type = line[0] # L : laser scan measurement, O : odometry measurement
@@ -132,8 +124,6 @@ def main():
             first_time_idx = False
             continue
 
-        # print (np.array(X_bar[:, 3]))
-
         X_bar_new = np.zeros( (num_particles,4), dtype=np.float64)
         u_t1 = odometry_robot
         for m in range(0, num_particles):
@@ -151,18 +141,14 @@ def main():
             if (meas_type == "L"):
                 z_t = ranges
                 w_t = sensor_model.beam_range_finder_model(z_t, x_t1)
-                # w_t = 1/num_particles
                 X_bar_new[m, :] = np.hstack((x_t1, w_t))
             else:
                 X_bar_new[m, :] = np.hstack((x_t1, X_bar[m, 3]))
             
-            # print(X_bar_new[m, 3])
         
         X_bar = X_bar_new
         u_t0 = u_t1
 
-        # print (np.array(X_bar[:, 3]))
-        # visualizing after motion & sensor model
         visualize_timestep(X_bar, None)
 
         """
@@ -170,13 +156,10 @@ def main():
         """
         if (meas_type == "L"):
             
-            # X_bar = resampler.low_variance_sampler(X_bar)
-            # print(X_bar[:, 3])
             w = X_bar[:, 3] / np.sum(X_bar[:, 3])
             X_bar = [X_bar[i] for i in np.random.choice(np.arange(len(X_bar)), size=len(X_bar), p=w)]
             X_bar = np.array(X_bar)
 
-        # visualze after resampling
         visualize_timestep(X_bar, None)
 
         if vis_flag:

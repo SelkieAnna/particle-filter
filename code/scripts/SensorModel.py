@@ -73,10 +73,8 @@ class SensorModel:
                 p_rand = 0
             
             p = self.z_hit * p_hit + self.z_short * p_short + self.z_max * p_max + self.z_rand * p_rand
-            # print(p)
             if p > 0:
                 q = q + np.log(p)
-                # print(q)
 
         q = q /10
         return np.exp(q)    
@@ -87,20 +85,14 @@ class SensorModel:
                        x_t1[1] + self.offset * np.sin(x_t1[2])]
         start_point = [int(round(start_point[0])), int(round(start_point[1]))]
         finish_point = start_point
-        # print(start_point)
-        # print(self.map[finish_point[0], finish_point[1]])
         while 0 < finish_point[0] < self.map.shape[1] and 0 < finish_point[1] < self.map.shape[0] \
                                     and abs(self.map[finish_point[0], finish_point[1]]) < 0.0000001: 
             finish_point[0] += 2 * np.cos(angle)
             finish_point[1] += 2 * np.sin(angle)
             finish_point = [int(round(finish_point[0])), int(round(finish_point[1]))]
-        #     print(self.map[finish_point[0], finish_point[1]])
             
-        # print(finish_point)
         start_point = np.array(start_point)
         finish_point = np.array(finish_point)
-        # print(np.linalg.norm(finish_point - start_point))
-        # print('-----------')
         return np.linalg.norm(finish_point - start_point)
  
 if __name__=='__main__':

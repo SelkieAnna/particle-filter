@@ -44,26 +44,17 @@ class Resampling:
         M = len(X_bar)
         r = np.random.uniform() * (M ** -1)
         w = np.array(X_bar[:, 3])
-        # print(w)
         w = w / np.sum(w)
-        # print(w)
         c = w[0]
         i = 0
         for m in range(M):
             U = r + (m) * (M ** -1)
             while U > c:
                 i = i + 1
-                # all the weights are 0
                 c = c + w[i]
             X_bar_resampled.append(X_bar[i])
         
         return X_bar_resampled
-
-    def normalize(self, v):
-        norm = np.linalg.norm(v)
-        if norm == 0: 
-            return v
-        return v / norm
 
 if __name__ == "__main__":
     pass
